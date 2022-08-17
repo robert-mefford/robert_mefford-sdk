@@ -8,7 +8,7 @@ const headers = {
 }
 /**
  * 
- * Get all movies for one api
+ * Get all characters for one api
  * 
  */
 const getAllCharacters = (params = {}) => {
@@ -22,7 +22,7 @@ const getAllCharacters = (params = {}) => {
 
 /**
  * 
- * Get one specific movie from id 
+ * Get one specific character from id 
  * 
  */
 
@@ -37,7 +37,7 @@ const getCharacterById = (id) => {
 
 /**
  * 
- * Get Quotes for one specific movie
+ * Get Quotes for one specific character
  * 
  */
 const getQuotesByCharacterId = (characterId) => {
