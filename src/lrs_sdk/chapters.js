@@ -34,3 +34,5 @@ const getChapterById = (id) => {
       throw e;
     });
 }
+
+module.exports = { getAllChapters, getChapterById };
