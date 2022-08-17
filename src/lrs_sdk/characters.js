@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const dotenv = require('dotenv');
 dotenv.config({ path: `../../.env` });
 
-const MOVIE_URL = `${process.env.API_URL}/movie`;
+const CHARACTER_URL = `${process.env.API_URL}/character`;
 const headers = {
   Authorization: `Bearer ${process.env.TOKEN}`
 }
@@ -11,8 +11,8 @@ const headers = {
  * Get all movies for one api
  * 
  */
-const getAllMovies = (params = {}) => {
-  return fetch(`${MOVIE_URL}?` + new URLSearchParams(params), { headers })
+const getAllCharacters = (params = {}) => {
+  return fetch(`${CHARACTER_URL}?` + new URLSearchParams(params), { headers })
     .then(res => res.json())
     .then(res => res.docs)
     .catch(e => {
@@ -26,8 +26,8 @@ const getAllMovies = (params = {}) => {
  * 
  */
 
-const getMovieById = (id) => {
-  return fetch(`${MOVIE_URL}/${id}`, { headers })
+const getCharacterById = (id) => {
+  return fetch(`${CHARACTER_URL}/${id}`, { headers })
     .then(res => res.json())
     .then(res => res.docs[0])
     .catch(e => {
@@ -40,8 +40,8 @@ const getMovieById = (id) => {
  * Get Quotes for one specific movie
  * 
  */
-const getQuotesByMovieId = (movieId) => {
-  return fetch(`${MOVIE_URL}/${movieId}/quote`, { headers })
+const getQuotesByCharacterId = (characterId) => {
+  return fetch(`${CHARACTER_URL}/${characterId}/quote`, { headers })
     .then(res => res.json())
     .then(res => {
       return res.docs;
