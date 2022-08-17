@@ -50,3 +50,5 @@ const getQuotesByMovieId = (movieId) => {
       throw e;
     })
 }
+
+module.exports = { getAllMovies, getMovieById, getQuotesByMovieId };
