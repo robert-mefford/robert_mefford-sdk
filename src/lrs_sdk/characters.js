@@ -50,3 +50,5 @@ const getQuotesByCharacterId = (characterId) => {
       throw e;
     })
 }
+
+module.exports = { getAllCharacters, getCharacterById, getQuotesByCharacterId };
