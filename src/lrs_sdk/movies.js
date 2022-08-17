@@ -2,15 +2,18 @@ const fetch = require('node-fetch');
 const dotenv = require('dotenv');
 dotenv.config({ path: `../../.env` });
 
+const MOVIE_URL = `${process.env.API_URL}/movie`;
+const headers = {
+  Authorization: `Bearer ${process.env.TOKEN}`
+}
 /**
  * 
  * Get all books for one api
  * params: This object represent the several queries such as sorting, filtering
  * 
  */
-
-const getAllBooks = (params = {}) => {
-  return fetch(`${process.env.API_URL}/book?` + new URLSearchParams(params))
+const getAllMovies = (params = {}) => {
+  return fetch(`${MOVIE_URL}?` + new URLSearchParams(params), { headers })
     .then(res => res.json())
     .then(res => res.docs)
     .catch(e => {
@@ -24,8 +27,8 @@ const getAllBooks = (params = {}) => {
  * 
  */
 
-const getBookById = (id) => {
-  return fetch(`${BOOK_URL}/${id}`)
+const getMovieById = (id) => {
+  return fetch(`${MOVIE_URL}/${id}`, { headers })
     .then(res => res.json())
     .then(res => res.docs[0])
     .catch(e => {
@@ -38,8 +41,8 @@ const getBookById = (id) => {
  * Get Chapters for one specific book
  * 
  */
-const getChaptersByBookId = (bookId) => {
-  return fetch(`${BOOK_URL}/${bookId}/chapter`)
+const getQuotesByMovieId = (movieId) => {
+  return fetch(`${MOVIE_URL}/${movieId}/quote`, { headers })
     .then(res => res.json())
     .then(res => {
       return res.docs;
@@ -48,5 +51,3 @@ const getChaptersByBookId = (bookId) => {
       throw e;
     })
 }
-
-getAllBooks().then(res => console.log(res));
