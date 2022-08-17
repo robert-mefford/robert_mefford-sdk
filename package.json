@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --setupFiles dotenv/config"
+  },
+  "jest": {
+    "collectCoverage": true
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.1",
-    "node-fetch": "2.0"
+    "jest": "^28.1.3",
+    "node-fetch": "2.0",
+    "save-dev": "^0.0.1-security"
   }
 }
