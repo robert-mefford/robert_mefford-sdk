@@ -2,6 +2,8 @@ const fetch = require('node-fetch');
 const dotenv = require('dotenv');
 dotenv.config({ path: `../../.env` });
 
+const BOOK_URL = `${process.env.API_URL}/book`;
+
 /**
  * 
  * Get all books for one api
@@ -10,7 +12,7 @@ dotenv.config({ path: `../../.env` });
  */
 
 const getAllBooks = (params = {}) => {
-  return fetch(`${process.env.API_URL}/book?` + new URLSearchParams(params))
+  return fetch(`${BOOK_URL}?` + new URLSearchParams(params))
     .then(res => res.json())
     .then(res => res.docs)
     .catch(e => {
@@ -49,4 +51,4 @@ const getChaptersByBookId = (bookId) => {
     })
 }
 
-getAllBooks().then(res => console.log(res));
+module.exports = { getAllBooks, getBookById, getChaptersByBookId };
