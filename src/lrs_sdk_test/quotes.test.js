@@ -17,6 +17,6 @@ describe("chapter sdk test", () => {
 
   test("getQuoteByRegex function test", async () => {
     const res = await getQuoteByRegex("dialog", "/cursed/i");
-    expect(res.length).toBe(3);
+    expect(res.length).toBe(4);
   });
 });

@@ -21,6 +21,6 @@ describe("Movie sdk test", () => {
   test("getMoviesByRegex function test", async () => {
     const res = await getMoviesByRegex("name","/Return/i");
     expect(res.length).toBe(1);
-    expect(res._id).toBe("5cd95395de30eff6ebccde5d");
+    expect(res[0]._id).toBe("5cd95395de30eff6ebccde5d");
   })
 })

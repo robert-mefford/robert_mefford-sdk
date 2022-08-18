@@ -18,7 +18,7 @@ describe("chapter sdk test", () => {
   test("getChaptersByRegex function test", async () => {
     const res = await getChaptersByRegex("chapterName", "/Knife/i");
     expect(res.length).toBe(1);
-    expect(res._id).toBe("6091b6d6d58360f988133b95");
-    expect(res.book).toBe("5cf5805fb53e011a64671582");
+    expect(res[0]._id).toBe("6091b6d6d58360f988133b95");
+    expect(res[0].book).toBe("5cf5805fb53e011a64671582");
   })
 });
