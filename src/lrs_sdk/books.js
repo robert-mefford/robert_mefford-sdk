@@ -1,9 +1,5 @@
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
-dotenv.config({ path: `../../.env` });
-
-const BOOK_URL = `${process.env.API_URL}/book`;
-
+const { BOOK_URL } = require('../utils/config');
 /**
  * 
  * Get all books for one api

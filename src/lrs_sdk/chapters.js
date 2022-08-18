@@ -1,11 +1,5 @@
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
-dotenv.config({ path: `../../.env` });
-
-const CHAPTER_URL = `${process.env.API_URL}/chapter`;
-const headers = {
-  Authorization: `Bearer ${process.env.TOKEN}`
-}
+const { headers, CHAPTER_URL } = require('../utils/config');
 /**
  * 
  * Get all chapters for one api

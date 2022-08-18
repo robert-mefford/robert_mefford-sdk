@@ -1,11 +1,5 @@
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
-dotenv.config({ path: `../../.env` });
-
-const QUOTE_URL = `${process.env.API_URL}/quote`;
-const headers = {
-  Authorization: `Bearer ${process.env.TOKEN}`
-}
+const { headers, QUOTE_URL } = require('../utils/config');
 /**
  * 
  * Get all quotes for one api

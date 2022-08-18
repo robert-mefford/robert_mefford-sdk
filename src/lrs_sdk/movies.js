@@ -1,11 +1,5 @@
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
-dotenv.config({ path: `../../.env` });
-
-const MOVIE_URL = `${process.env.API_URL}/movie`;
-const headers = {
-  Authorization: `Bearer ${process.env.TOKEN}`
-}
+const { headers, MOVIE_URL } = require('../utils/config');
 /**
  * 
  * Get all movies for one api

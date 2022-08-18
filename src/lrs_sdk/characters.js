@@ -1,11 +1,5 @@
 const fetch = require('node-fetch');
-const dotenv = require('dotenv');
-dotenv.config({ path: `../../.env` });
-
-const CHARACTER_URL = `${process.env.API_URL}/character`;
-const headers = {
-  Authorization: `Bearer ${process.env.TOKEN}`
-}
+const { headers, CHARACTER_URL } = require('../utils/config');
 /**
  * 
  * Get all characters for one api
