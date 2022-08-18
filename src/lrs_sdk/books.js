@@ -47,4 +47,11 @@ const getChaptersByBookId = (bookId) => {
     })
 }
 
-module.exports = { getAllBooks, getBookById, getChaptersByBookId };
+/**
+ * Get Books with Regular Expression
+ */
+const getBooksByRegex = (option, regex) => {
+  return getAllBooks({ [option]: regex });
+}
+
+module.exports = { getAllBooks, getBookById, getChaptersByBookId, getBooksByRegex };
