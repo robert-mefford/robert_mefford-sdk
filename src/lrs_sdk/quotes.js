@@ -11,10 +11,29 @@ const headers = {
  * Get all quotes for one api
  * 
  */
-const getAllQuotes = (params = {}) => {
+const getAllQuotes = async (params = {}) => {
+  let data = [];
+  await getQuoteOnePage({...params, page: 1})
+    .then(async res => {
+      data = res.docs;
+      for(let i = 2; i <= res.pages; i++) {
+        getQuoteOnePage({...params, page: i}).then(res => res.docs);
+      }
+    })
+    .catch(e => {
+      throw e;
+    });
+  return data;
+}
+
+/**
+ * Get quotes for one page
+ */
+
+const getQuoteOnePage = async (params) => {
   return fetch(`${QUOTE_URL}?` + new URLSearchParams(params), { headers })
     .then(res => res.json())
-    .then(res => res.docs)
+    .then(res => res)
     .catch(e => {
       throw e;
     });
@@ -34,3 +53,7 @@ const getQuoteById = (id) => {
       throw e;
     });
 }
+
+getAllQuotes().then(res => console.log(res.length));
+
+module.exports = { getAllQuotes, getQuoteById };
