@@ -1,4 +1,4 @@
-const { getAllQuotes, getQuoteById } = require('../lrs_sdk/quotes');
+const { getAllQuotes, getQuoteById, getQuoteByRegex } = require('../lrs_sdk/quotes');
 
 describe("chapter sdk test", () => {
 
@@ -13,5 +13,10 @@ describe("chapter sdk test", () => {
     expect(res.dialog).toBe("Pull it in! Go on, go on, go on, pull it in!");
     expect(res.movie).toBe('5cd95395de30eff6ebccde5d');
     expect(res.character).toBe('5cd99d4bde30eff6ebccfe9e');
+  });
+
+  test("getQuoteByRegex function test", async () => {
+    const res = await getQuoteByRegex("dialog", "/cursed/i");
+    expect(res.length).toBe(3);
   });
 });

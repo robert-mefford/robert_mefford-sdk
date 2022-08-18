@@ -45,4 +45,8 @@ const getQuoteById = (id) => {
     });
 }
 
-module.exports = { getAllQuotes, getQuoteById };
+const getQuoteByRegex = (option, regex) => {
+  return getAllQuotes({ [option]: regex });
+}
+
+module.exports = { getAllQuotes, getQuoteById, getQuoteByRegex };
