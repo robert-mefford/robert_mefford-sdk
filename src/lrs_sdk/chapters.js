@@ -5,10 +5,22 @@ const { headers, CHAPTER_URL } = require('../utils/config');
  * Get all chapters for one api
  * 
  */
-const getAllChapters = (params = {}) => {
+const getAllChapters = async(params = {}) => {
+  let data = await getChaptersOnePage({ ...params, page: 1 });
+  return data;
+}
+
+const getChaptersOnePage = (params) => {
   return fetch(`${CHAPTER_URL}?` + new URLSearchParams(params), { headers })
     .then(res => res.json())
-    .then(res => res.docs)
+    .then(res => {
+      if(params.page == res.pages) {
+        return res.docs;
+      }
+      return getChaptersOnePage({...params, page: params.page+1}).then(nextRes => {
+        return [...res.docs, ...nextRes];
+      })
+    })
     .catch(e => {
       throw e;
     });
@@ -29,4 +41,8 @@ const getChapterById = (id) => {
     });
 }
 
-module.exports = { getAllChapters, getChapterById };
+const getChaptersByRegex = (option, regex) => {
+  return getAllChapters({ [option]: regex });
+}
+
+module.exports = { getAllChapters, getChapterById, getChaptersByRegex };
