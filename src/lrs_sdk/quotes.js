@@ -6,17 +6,7 @@ const { headers, QUOTE_URL } = require('../utils/config');
  * 
  */
 const getAllQuotes = async (params = {}) => {
-  let data = [];
-  await getQuoteOnePage({...params, page: 1})
-    .then(async res => {
-      data = res.docs;
-      for(let i = 2; i <= res.pages; i++) {
-        getQuoteOnePage({...params, page: i}).then(res => res.docs);
-      }
-    })
-    .catch(e => {
-      throw e;
-    });
+  let data = await getQuoteOnePage({...params, page: 1});
   return data;
 }
 
@@ -27,7 +17,14 @@ const getAllQuotes = async (params = {}) => {
 const getQuoteOnePage = async (params) => {
   return fetch(`${QUOTE_URL}?` + new URLSearchParams(params), { headers })
     .then(res => res.json())
-    .then(res => res)
+    .then(res => {
+      if(params.page == res.pages) {
+        return res.docs;
+      }
+      return getQuoteOnePage({...params, page: params.page+1}).then(nextRes => {
+        return [...res.docs, ...nextRes];
+      })
+    })
     .catch(e => {
       throw e;
     });
@@ -47,7 +44,5 @@ const getQuoteById = (id) => {
       throw e;
     });
 }
-
-getAllQuotes().then(res => console.log(res.length));
 
 module.exports = { getAllQuotes, getQuoteById };
