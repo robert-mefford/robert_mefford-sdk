@@ -5,10 +5,23 @@ const { headers, CHARACTER_URL } = require('../utils/config');
  * Get all characters for one api
  * 
  */
-const getAllCharacters = (params = {}) => {
+const getAllCharacters = async(params = {}) => {
+  let data = await getCharactersOnePage({ ...params, page: 1 });
+  return data;
+}
+
+const getCharactersOnePage = (params) => {
+  
   return fetch(`${CHARACTER_URL}?` + new URLSearchParams(params), { headers })
     .then(res => res.json())
-    .then(res => res.docs)
+    .then(res => {
+      if(params.page == res.pages) {
+        return res.docs;
+      }
+      return getCharactersOnePage({...params, page: params.page+1}).then(nextRes => {
+        return [...res.docs, ...nextRes];
+      })
+    })
     .catch(e => {
       throw e;
     });
@@ -45,4 +58,10 @@ const getQuotesByCharacterId = (characterId) => {
     })
 }
 
-module.exports = { getAllCharacters, getCharacterById, getQuotesByCharacterId };
+const getCharacterByRegex = (option, regex) => {
+  return getAllCharacters({ [option]: regex });
+}
+
+getCharacterByRegex("name", "/foot/i").then(rs => console.log(rs.length));
+
+module.exports = { getAllCharacters, getCharacterById, getQuotesByCharacterId, getCharacterByRegex};

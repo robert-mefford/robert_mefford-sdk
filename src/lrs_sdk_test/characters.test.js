@@ -1,4 +1,4 @@
-const { getAllCharacters, getCharacterById, getQuotesByCharacterId } = require('../lrs_sdk/characters');
+const { getAllCharacters, getCharacterById, getQuotesByCharacterId, getCharacterByRegex } = require('../lrs_sdk/characters');
 
 describe("Characters sdk test", () => {
   test("getAllCharacters function test", async () => {
@@ -18,4 +18,9 @@ describe("Characters sdk test", () => {
     const res = await getQuotesByCharacterId("5cd99d4bde30eff6ebccfea0");
     expect(res.length).toBe(216);
   });
+
+  test("getCharacterByRegex function test", async () => {
+    const res = await getCharacterByRegex("name", "/foot/i");
+    expect(res.length).toBe(11);
+  })
 })
