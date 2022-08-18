@@ -62,6 +62,4 @@ const getCharacterByRegex = (option, regex) => {
   return getAllCharacters({ [option]: regex });
 }
 
-getCharacterByRegex("name", "/foot/i").then(rs => console.log(rs.length));
-
 module.exports = { getAllCharacters, getCharacterById, getQuotesByCharacterId, getCharacterByRegex};
