@@ -45,4 +45,8 @@ const getQuotesByMovieId = (movieId) => {
     })
 }
 
-module.exports = { getAllMovies, getMovieById, getQuotesByMovieId };
+const getMoviesByRegex = (option, regex) => {
+  return getAllMovies({ [option]: regex });
+}
+
+module.exports = { getAllMovies, getMovieById, getQuotesByMovieId, getMoviesByRegex };
